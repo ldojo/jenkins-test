@@ -1,23 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:7-alpine' }
+    }
     stages {
-        /* "Build" and "Test" stages omitted */
-
-        stage('Deploy - Staging') {
+        stage('Test') {
             steps {
-                sh 'echo staging'
-            }
-        }
-
-        stage('Sanity check') {
-            steps {
-                input "Does the staging environment look ok?"
-            }
-        }
-
-        stage('Deploy - Production') {
-            steps {
-                sh 'echo production-deploy'
+                sh 'node --version'
             }
         }
     }
